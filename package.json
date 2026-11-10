@@ -1,0 +1,62 @@
+{
+  "name": "icsi-rrhh",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "dev:tunnel": "vite --mode tunnel",
+    "preview:tunnel": "vue-tsc -b && vite build --mode tunnel && vite preview --mode tunnel",
+    "tunnel": "ngrok http 5173",
+    "tunnel:preview": "ngrok http 4173",
+    "typecheck": "vue-tsc -b",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:types": "supabase gen types typescript --local > src/shared/types/database.types.ts",
+    "graph": "codegraph",
+    "graph:status": "codegraph status",
+    "graph:sync": "codegraph sync",
+    "spec": "openspec",
+    "spec:check": "openspec validate --all --strict",
+    "spec:list": "openspec list --specs"
+  },
+  "dependencies": {
+    "@primeuix/themes": "^2.0.3",
+    "@supabase/supabase-js": "^2.118.0",
+    "@tanstack/vue-query": "^5.105.0",
+    "exceljs": "^4.4.0",
+    "pinia": "^4.1.0",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.5.5",
+    "vee-validate": "^4.15.1",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@colbymchenry/codegraph": "1.6.2",
+    "@fission-ai/openspec": "1.14.2",
+    "@types/node": "^26.6.6",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "eslint": "^10.14.0",
+    "eslint-plugin-vue": "^10.12.0",
+    "jszip": "^3.10.2",
+    "prettier": "^3.9.10",
+    "supabase": "^2.122.0",
+    "typescript": "~5.9",
+    "typescript-eslint": "^8.72.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5",
+    "vue-tsc": "^3.3.14"
+  }
+}

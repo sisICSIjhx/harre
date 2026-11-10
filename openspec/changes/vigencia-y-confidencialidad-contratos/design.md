@@ -1,0 +1,17 @@
+# Design
+
+## Decisiones
+
+- **Una tabla para ambos tipos de confidencialidad** (`employee_confidentiality_agreements.document_kind`). La interfaz muestra dos tablas filtradas por tipo; `RecordEditor` añade el filtro al insertar, así que el tipo se fija sin pedirlo.
+- **Contrato de la misma persona garantizado por la base:** `employee_contracts` tiene `unique (id, employee_id)` y la confidencialidad referencia `(contract_id, employee_id)`. No se puede ligar un contrato ajeno aunque se manipule la petición. (En la primera versión la referencia apuntaba a `employment_records`.)
+- **Un solo campo de contrato con fechas propias (revisión del 2026-11-04):** «Vigencia» duplicaba «Contrato». A pedido del usuario se conserva `contract_type`, se le suman las opciones de vigencia que no repetía y se retiran `contract_term` y `contract_term_months`; los meses se sustituyen por `contract_start_date` y `contract_end_date`, opcionales. Dos restricciones: término no anterior al inicio, y sin fechas cuando el contrato es Indeterminado. La migración `contract_dates` traslada la vigencia a Contrato si este está vacío y se detiene si hubiera meses o una vigencia distinta del contrato (en local no había ninguna). Ingreso, Alta IMSS y Baja quedan en un apartado aparte porque describen la relación con la empresa, no cada contrato.
+- **Contratos en tabla propia (segunda revisión del 2026-11-04):** el usuario aclaró que «separado» significa tablas distintas, no apartados del mismo formulario. `employee_contracts` guarda tipo, inicio, término y observaciones; `employment_records` conserva solo la relación con la empresa. La migración `separate_contracts` traslada los contratos capturados, liga la confidencialidad a `contract_id` (FK compuesta con `employee_id`), sustituye la vista de opciones y publica `V_ALTAS_BAJAS` y `V_CONTRATOS`. La importación del libro crea el contrato a partir de `Tipo_contrato`.
+- **Campos condicionales en `RecordField`:** `visibleWhen` oculta un campo según otros valores; al ocultarse se vacía y se guarda nulo. `RecordEditor.related` invalida vistas dependientes, como las opciones de contrato.
+- **Documentos laborales para todo el personal:** además de la regla General, cada persona recibe una fila de control de Contrato, Carta y Acuerdo (Requerido, Sin revisar) para que aparezcan en su lista; un trigger en `employees` hace lo mismo con las altas nuevas.
+- **Opciones de contrato desde una vista** `vw_employee_contract_options` (`security_invoker`, hereda RLS) con una etiqueta legible: tipo · inicio · término. `RecordField.lookup` admite un `filter` para limitarla a la persona del expediente.
+- **Requerido para todos:** la regla General ya interpretaba la ausencia de fila como Requerido, pero el expediente solo lista filas existentes; por eso se insertan las filas por persona (ver arriba).
+- **Publicación en la misma fila del contrato:** como hay como máximo una carta y un acuerdo por contrato, `V_CONTRATOS` lleva dos columnas de fecha de firma en lugar de una hoja aparte. La tabla de confidencialidad encola la publicación como las demás del expediente. La nueva versión de `sync_read_snapshot` parte de la vigente en la base y solo cambia el bloque `contracts`.
+
+## Riesgos
+
+- El servidor de desarrollo está en uso: la migración es aditiva y se aplica antes de los cambios de interfaz, para que cada guardado servido por Vite sea coherente con la base.

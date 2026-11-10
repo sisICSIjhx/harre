@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM"],
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "composite": true,
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "types": ["node"]
+  },
+  "include": [
+    "api/**/*.ts",
+    "server/**/*.ts",
+    "tests/**/*.ts",
+    "src/shared/types/database.types.ts",
+    "src/features/employees/schemas/*.ts",
+    "src/features/leave/schemas/*.ts",
+    "src/shared/lib/record-fields.ts",
+    "src/shared/lib/record-errors.ts",
+    "src/shared/lib/clabe.ts",
+    "src/shared/utils/format.ts",
+    "src/shared/utils/age.ts",
+    "src/features/dashboard/dashboard-metrics.ts",
+    "src/shared/design/design-mode.ts",
+    "src/shared/design/theme-mode.ts",
+    "src/shared/design/unsaved-changes.ts",
+    "vite.config.ts"
+  ],
+  "exclude": ["tests/unit/employee-list.store.test.ts", "tests/unit/records-delete.test.ts"]
+}

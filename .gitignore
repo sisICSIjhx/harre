@@ -1,0 +1,36 @@
+# Dependencias y compilación
+node_modules/
+dist/
+*.tsbuildinfo
+coverage/
+
+# Secretos y entornos: conservar solo .env.example
+.env
+.env.*
+!.env.example
+.vercel/
+
+# Supabase local
+supabase/.branches/
+supabase/.temp/
+
+# Nunca versionar datos reales
+/.privado/
+*.xlsx
+*.dump
+*.backup
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.log
+
+# Índices y configuración personal de herramientas IA
+/.codegraph/
+/.cache/
+/.claude/settings.local.json
+
+.vercel

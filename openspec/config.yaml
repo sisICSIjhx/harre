@@ -1,0 +1,52 @@
+schema: spec-driven
+
+context: |
+  Language: Spanish
+  All artifacts must be written in Spanish.
+  Keep OpenSpec structural headings and SHALL/MUST keywords in English.
+  Producto ICSI RRHH: Vue 3, TypeScript, Vite, Supabase y ExcelJS.
+  Consultar docs/CONTEXTO_PROYECTO.md y la política proporcional en AGENTS.md.
+  Preservar cambios existentes y no registrar secretos ni datos personales.
+  Supabase es la fuente oficial; la publicación a SharePoint es unidireccional.
+
+rules:
+  proposal:
+    - Explicar problema, alcance y capacidades afectadas; distinguir estado comprobado de propuesta.
+  specs:
+    - Usar SHALL y escenarios WHEN/THEN con contenido en español y encabezados estructurales en inglés.
+    - Cubrir errores, límites y permisos cuando corresponda.
+  design:
+    - Referenciar rutas reales y respetar la separación entre frontend y backend.
+  tasks:
+    - Separar implementación y validación verificable; incluir actualización de HISTORIAL.md.
+
+operations:
+  apply:
+    guidance:
+      - Aprovechar la autorización existente; OpenSpec no añade una nueva aprobación.
+      - Ejecutar verificaciones proporcionales y registrar únicamente resultados comprobados.
+  archive:
+    guidance:
+      - Sincronizar specs y registrar resultados y pendientes en HISTORIAL.md.
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

@@ -1,0 +1,15 @@
+{
+  "exclude": [
+    ".agents/**",
+    ".claude/**",
+    ".codex/**",
+    ".cache/**",
+    "**/.env*",
+    "dist/**",
+    "coverage/**",
+    "excel/**",
+    "src/shared/types/database.types.ts",
+    "supabase/.temp/**",
+    "supabase/.branches/**"
+  ]
+}
